@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="UTF-8">
+  <link href="data/icons/apple-icon-57x57.png" rel="apple-touch-icon" sizes="57x57">
+  <link href="data/icons/apple-icon-60x60.png" rel="apple-touch-icon" sizes="60x60">
+  <link href="data/icons/apple-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+  <link href="data/icons/apple-icon-76x76.png" rel="apple-touch-icon" sizes="76x76">
+  <link href="data/icons/apple-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  <link href="data/icons/apple-icon-120x120.png" rel="apple-touch-icon" sizes="120x120">
+  <link href="data/icons/apple-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+  <link href="data/icons/apple-icon-152x152.png" rel="apple-touch-icon" sizes="152x152">
+  <link href="data/icons/apple-icon-180x180.png" rel="apple-touch-icon" sizes="180x180">
+  <link href="/android-icon-192x192.png" rel="icon" sizes="192x192" type="image/png">
+  <link href="data/icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+  <link href="data/icons/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png">
+  <link href="data/icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+  <meta content="#ffffff" name="msapplication-TileColor">
+  <meta content="data/icons/ms-icon-144x144.png" name="msapplication-TileImage">
+  <meta content="#ffffff" name="theme-color">
+  <title>Friday Chicken</title>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css' rel='stylesheet prefetch'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css' rel='stylesheet prefetch'>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <section class='wrapper'>
+    <div class='header'>
+      <div class='flex-wrapper'>
+        <h1 class='black'>How long before we can eat that delicious chicken again?</h1>
+        <h2 class='red'>Brahk Brahk</h2>
+      </div>
+      <hr>
+    </div>
+    <div class='countdown'>
+      <div class="countdown__block days">
+        <span class="countdown--result" id="days"></span><span class="countdown--unit">Days</span>
+      </div>
+      <div class="countdown__block hours">
+        <span class="countdown--result" id="hours"></span><span class="countdown--unit">Hours</span>
+      </div>
+      <div class="countdown__block minutes">
+        <span class="countdown--result" id="minutes"></span><span class="countdown--unit">Minutes</span>
+      </div>
+      <div class="countdown__block seconds">
+        <span class="countdown--result" id="seconds"></span><span class="countdown--unit">Secondes</span>
+      </div>
+    </div>
+    <div class='footer'>
+      <hr>
+      <h3>Every Friday, we meet to eat the finest chicken breast. Not a club, rather a religion.</h3>
+      <h4>Website by <a href='https://denismoulin.com'>Tommy Beakster</a></h4>
+      <hr>
+    </div>
+  </section>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'>
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/easy-countdown/2.2.0/countdown.js'>
+  </script>
+  <script>
+    $( document ).ready(function() {
+     getSeconds();
+    });
+
+    var curday;
+    var secTime;
+    var ticker;
+
+    function getSeconds() {
+    var nowDate = new Date();
+    var dy = 5 ; //Sunday through Saturday, 0 to 6
+    var countertime = new Date(nowDate.getFullYear(),nowDate.getMonth(),nowDate.getDate(),12,30,0); //20 out of 24 hours = 8pm
+
+    var curtime = nowDate.getTime(); //current time
+    var atime = countertime.getTime(); //countdown time
+    var diff = parseInt((atime - curtime)/1000);
+    if (diff > 0) { curday = dy - nowDate.getDay() }
+    else { curday = dy - nowDate.getDay() -1 } //after countdown time
+    if (curday < 0) { curday += 7; } //already after countdown time, switch to next week
+    if (diff <= 0) { diff += (86400 * 7) }
+    startTimer (diff);
+    }
+
+    function startTimer(secs) {
+    secTime = parseInt(secs);
+    ticker = setInterval("tick()",1000);
+    tick(); //initial count display
+    }
+
+    function tick() {
+    var secs = secTime;
+    if (secs>0) {
+     secTime--;
+    }
+    else {
+     clearInterval(ticker);
+     getSeconds(); //start over
+    }
+
+    var days = Math.floor(secs/86400);
+    secs %= 86400;
+    var hours= Math.floor(secs/3600);
+    secs %= 3600;
+    var mins = Math.floor(secs/60);
+    secs %= 60;
+
+    //update the time display
+    document.getElementById("days").innerHTML = ((curday < 10 ) ? "0" : "" ) + curday;
+    document.getElementById("hours").innerHTML = ((hours < 10 ) ? "0" : "" ) + hours;
+    document.getElementById("minutes").innerHTML = ( (mins < 10) ? "0" : "" ) + mins;
+    document.getElementById("seconds").innerHTML = ( (secs < 10) ? "0" : "" ) + secs;
+    }
+  </script>
+</body>
+</html>
