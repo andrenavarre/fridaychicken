@@ -7,7 +7,7 @@ var animation = bodymovin.loadAnimation({
   });
 
 anim.addEventListener("enterFrame", function (animation) {
-  if (animation.currentTime > (anim.totalFrames - 1)) {
+  if (animation.currentTime > (anim.totalFrames - 10)) {
      anim.pause();
   }
 });
