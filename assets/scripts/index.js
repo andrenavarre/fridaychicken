@@ -4,4 +4,10 @@ var animation = bodymovin.loadAnimation({
     loop: false,
     autoplay: true,
     path: 'data.json'
-  })
+  });
+
+anim.addEventListener("enterFrame", function (animation) {
+  if (animation.currentTime > (anim.totalFrames - 1)) {
+     anim.pause();
+  }
+});
