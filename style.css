@@ -200,7 +200,6 @@ body {
 	align-items: center;
 }
 
-
 /* Elements */
 
 a:link,
@@ -224,14 +223,17 @@ a:hover {
 	background: #F15822;
 }
 
-svg.event--logo {
-	width: 100%;
-	max-width: 25rem;
-	height: auto;
+/* Animated logo */
+#lottie{
+	max-width: 65rem;
+	width: auto;
+	height: 100%;
+	display:block;
+	transform: translate3d(0px, 0px, 0px);
 }
 
-svg.event--logo g {
-	fill: #F15822;
+#lottie svg{
+	transform: translate3d(0px, 0px, 0px);
 }
 
 svg.org--logo {
@@ -280,10 +282,51 @@ p.bump {
 
 /* Size Rules */
 
-
 @media screen and (min-width: 810px) {
 	.header {
 		margin-bottom: -20rem;
+	}
+
+	/* Animated logo */
+	#lottie{
+		max-width: 65rem;
+		width: auto;
+		height: 100%;
+		display:block;
+		transform: translate3d(-5rem, -3rem, 0px);
+	}
+
+	#lottie svg{
+	transform: translate3d(-11rem, 0px, 0px) !important;
+	}
+}
+
+@media screen and (max-height: 800px) and (min-width: 568px) {
+	/* Layout */
+	html,
+	body {
+		height: auto;
+	}
+
+	.wrapper {
+		justify-content: flex-start;
+		height: auto;
+	}
+
+	.header {
+		margin-bottom: 0rem;
+	}
+	
+
+	.footer{
+		margin-top: 8rem;
+	}
+
+	.unit--result {
+		font: 300 14rem/1 condensed, sans-serif;
+	}
+	.unit--symbol {
+		font: 300 1.6rem/1 regular, sans-serif;
 	}
 }
 
